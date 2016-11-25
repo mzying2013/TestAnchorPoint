@@ -25,7 +25,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.view1 = [UIView new];
-    self.view1.frame = CGRectMake(140, 80, 100, 100);
+    CGFloat view1Width = 100;
+    self.view1.frame = CGRectMake(self.view.center.x - view1Width/2, 140, view1Width, view1Width);
     self.view1.backgroundColor = [UIColor orangeColor];
     
     self.view2 = [UIView new];
@@ -38,7 +39,8 @@
     [self.changeAPBtn setBackgroundColor:[UIColor grayColor]];
     [self.changeAPBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.changeAPBtn addTarget:self action:@selector(changeAPBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    self.changeAPBtn.frame = CGRectMake(100, 300, 100, 40);
+    CGFloat apBtnWidth = 100;
+    self.changeAPBtn.frame = CGRectMake(self.view.center.x - apBtnWidth/2, 360, apBtnWidth, 40);
     self.changeAPBtn.layer.masksToBounds = YES;
     self.changeAPBtn.layer.cornerRadius = CGRectGetHeight(self.changeAPBtn.frame)/2;
     
@@ -74,6 +76,11 @@
 
 
 -(void)logViewCoord:(UIView *)view{
+    ///////////////公式///////////////////////////////
+    //frame.origin.x = position.x - bounds.size.width * anchorPoint.x
+    //frame.origin.y = position.y - bounds.size.height * anchorPoint.y
+    ////////////////////////////////////////////////
+    
     NSLog(@"frame:%@",NSStringFromCGRect(view.frame));
     NSLog(@"bounds:%@",NSStringFromCGRect(view.bounds));
     NSLog(@"center:%@",NSStringFromCGPoint(view.center));
@@ -92,7 +99,6 @@
                 CGFloat y = j * 0.5;
                 CGPoint point = CGPointMake(x, y);
                 [tempMArray addObject:[NSValue valueWithCGPoint:point]];
-                NSLog(@"point:%@",NSStringFromCGPoint(point));
             }
         }
         _testAPArray = [tempMArray copy];
